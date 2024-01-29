@@ -96,7 +96,7 @@ namespace Rocky.Controllers
                 else
                 {
                     //update
-                    var objFromDB = _prodRepo.FindOrDefault(x=>x.Id == obj.Product.Id, isTracking:false);
+                    var objFromDB = _prodRepo.FirstOrDefault(x=>x.Id == obj.Product.Id, isTracking:false);
                     if (files.Count > 0)
                     {
                         string upload = webRootPath + WC.ImagePath;
@@ -135,7 +135,7 @@ namespace Rocky.Controllers
             {
                 return NotFound();
             }
-            var obj = _prodRepo.FindOrDefault(u=>u.Id==id,includeProperties: "Category,ApplicationType");
+            var obj = _prodRepo.FirstOrDefault(u=>u.Id==id,includeProperties: "Category,ApplicationType");
             //obj.Category = _db.Category.Find(obj.CategoryId);
             if (obj == null)
             {

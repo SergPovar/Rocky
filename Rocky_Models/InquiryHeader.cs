@@ -12,8 +12,8 @@ namespace Rocky_Models
     {
         [Key]
         public int Id { get; set; }
-        public string ApplicationUcerId { get; set; }
-        [ForeignKey(nameof(ApplicationUcerId))]
+        public string ApplicationUserId { get; set; }
+        [ForeignKey(nameof(ApplicationUserId))]
         public ApplicationUser ApplicationUser { get; set; }
 
         public DateTime InquiryDate { get; set; }

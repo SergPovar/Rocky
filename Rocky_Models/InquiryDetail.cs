@@ -13,11 +13,11 @@ namespace Rocky_Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public string InquiryHeaderId { get; set; }
+        public int InquiryHeaderId { get; set; }
         [ForeignKey(nameof(InquiryHeaderId))]
         public InquiryHeader InquiryHeader { get; set; }
         [Required]
-        public string ProductId { get; set; }
+        public int ProductId { get; set; }
         [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }
     }
