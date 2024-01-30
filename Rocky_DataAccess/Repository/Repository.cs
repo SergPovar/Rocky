@@ -12,7 +12,7 @@ namespace Rocky_DataAccess.Repository
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly RockyDbContext _db;
-        internal DbSet<T> dbSet;
+        public DbSet<T> dbSet;
         public Repository(RockyDbContext db)
         {
             _db = db;
@@ -37,17 +37,16 @@ namespace Rocky_DataAccess.Repository
             }
             if (includeProperties != null)
             {
-                foreach (var property in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query = query.Include(property);
+                    query = query.Include(includeProp);
                 }
             }
-           
             if (!isTracking)
             {
                 query = query.AsNoTracking();
-
             }
+
             return query.FirstOrDefault();
         }
 
@@ -80,6 +79,11 @@ namespace Rocky_DataAccess.Repository
         public void Remove(T entity)
         {
             dbSet.Remove(entity);
+        }
+
+        public void RemoveRange(IEnumerable<T> entity)
+        {
+            dbSet.RemoveRange(entity);
         }
 
         public void Save()

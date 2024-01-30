@@ -32,7 +32,7 @@ namespace Rocky.Controllers
         {
             HomeVM homeVM = new HomeVM
             {
-                Products = _prodRepo.GetAll(includeProperties:"Category, ApplicationType"),
+                Products = _prodRepo.GetAll(includeProperties: "Category,ApplicationType"),
                 Categories = _catRepo.GetAll()
             };
 
@@ -100,8 +100,19 @@ namespace Rocky.Controllers
             {
                 shoppingCartList.Remove(itemToRemove);
             }
+            TempData[WC.Success] = "Item removed from cart successfully";
             HttpContext.Session.Set(WC.SessionCart, shoppingCartList);
             return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

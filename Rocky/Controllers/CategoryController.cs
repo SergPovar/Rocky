@@ -7,7 +7,8 @@ using System.Collections.Generic;
 
 namespace Rocky.Controllers
 {
-    [Authorize(Roles = WC.AdminRole)]
+    //[Authorize(Roles = WC.AdminRole)]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryRepository _catRepo;
@@ -34,8 +35,11 @@ namespace Rocky.Controllers
             {
                 _catRepo.Add(obj);
                 _catRepo.Save();
+                TempData[WC.Success] = "Category created successfuly";
                 return RedirectToAction("Index");
             }
+            TempData[WC.Error] = "Error while creating category";
+
             return View(obj);
         }
         //Get - Edit 
@@ -43,13 +47,15 @@ namespace Rocky.Controllers
         {
             if(id==null|| id == 0)
             {
+               
                 return NotFound();
             }
             var obj = _catRepo.Find(id.GetValueOrDefault());
             if (obj==null) {
+              
                 return NotFound();
             }
-            
+            TempData[WC.Success] = "Category edited successfuly";
             return View(obj);
         }
         //POST -Edit
@@ -61,8 +67,10 @@ namespace Rocky.Controllers
             {
                 _catRepo.Update(obj);
                 _catRepo.Save();
+                TempData[WC.Success] = "Category edited successfuly";
                 return RedirectToAction("Index");
             }
+            TempData[WC.Error] = "Error while edit category";
             return View(obj);
         }
         //Get - Delete
@@ -70,14 +78,16 @@ namespace Rocky.Controllers
         {
             if (id == null || id == 0)
             {
+               
                 return NotFound();
             }
             var obj = _catRepo.Find(id.GetValueOrDefault());
             if (obj == null)
             {
+                
                 return NotFound();
             }
-
+            
             return View(obj);
         }
         //POST - Delete
@@ -88,11 +98,13 @@ namespace Rocky.Controllers
             var obj = _catRepo.Find(id.GetValueOrDefault());
             if (obj == null)
             {
+               
                 return NotFound();
             }
              _catRepo.Remove(obj);
              _catRepo.Save();
-                return RedirectToAction("Index");
+            TempData[WC.Success] = "Category deleted successfuly";
+            return RedirectToAction("Index");
          
         }
     }

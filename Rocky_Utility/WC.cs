@@ -1,14 +1,37 @@
-﻿namespace Rocky
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
+namespace Rocky
 {
     public class WC
     {
-        public static string ImagePath = @"\images\product\";
-        public static string SessionCart = "ShoppingCartSession";
-        public static int SessionCount = 0;
+        public const string ImagePath = @"\images\product\";
+        public const string SessionCart = "ShoppingCartSession";
+        public const string SessionInquiryId = "InquirySession";
         public const string AdminRole = "Admin";
         public const string CustomerRole = "Customer";
-        public static string EmailAdmin = "sergterekhov4902@gmail.com";
-        public static string CategoryName = "Category";
-        public static string ApplicationTypeName = "ApplicationType";
+
+        public const string EmailAdmin = "ben.spark90@yahoo.com";
+
+
+        public const string CategoryName = "Category";
+        public const string ApplicationTypeName = "ApplicationType";
+
+        public const string Success = "Success";
+        public const string Error = "Error";
+
+        public const string StatusPending = "Pending";
+        public const string StatusApproved = "Approved";
+        public const string StatusInProcess = "Processing";
+        public const string StatusShipped = "Shipped";
+        public const string StatusCancelled = "Cancelled";
+        public const string StatusRefunded = "Refunded";
+
+        public static readonly IEnumerable<string> listStatus = new ReadOnlyCollection<string>(
+            new List<string>
+            {
+                StatusApproved,StatusCancelled,StatusInProcess,StatusPending,StatusRefunded,StatusShipped
+            });
     }
+
 }

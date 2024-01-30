@@ -7,7 +7,8 @@ using System.Collections.Generic;
 
 namespace Rocky.Controllers
 {
-    [Authorize(Roles = WC.AdminRole)]
+    // [Authorize(Roles = WC.AdminRole)]
+    [Authorize]
     public class ApplicationTypeController : Controller
     {
         private readonly IApplicationTypeRepository _appTypeRepo;
@@ -34,6 +35,7 @@ namespace Rocky.Controllers
             {
                 _appTypeRepo.Add(obj);
                 _appTypeRepo.Save();
+                TempData[WC.Success] = "Action completed successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -63,6 +65,7 @@ namespace Rocky.Controllers
             {
                 _appTypeRepo.Update(obj);
                 _appTypeRepo.Save();
+                TempData[WC.Success] = "Action completed successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -94,6 +97,7 @@ namespace Rocky.Controllers
             }
             _appTypeRepo.Remove(obj);
             _appTypeRepo.Save();
+            TempData[WC.Success] = "Action completed successfully";
             return RedirectToAction("Index");
 
         }
